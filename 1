@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Web Runner</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .editor-container {
+            background: #252526;
+            border: 1px solid #333;
+            border-radius: 8px;
+            width: 600px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        .header {
+            background: #2d2d2d;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dots span {
+            height: 12px;
+            width: 12px;
+            background: #ff5f56;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .dots span:nth-child(2) { background: #ffbd2e; }
+        .dots span:nth-child(3) { background: #27c93f; }
+        
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        button:hover { background: #1177bb; }
+        
+        pre {
+            padding: 15px;
+            margin: 0;
+            font-size: 13px;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        .output {
+            background: #181818;
+            padding: 12px 15px;
+            border-top: 1px solid #333;
+            color: #4ec9b0;
+            min-height: 24px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="editor-container">
+    <div class="header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <button onclick="runCode()">▶ Run</button>
+    </div>
+    <pre><code id="code-content">Binary = [
+    "11100000", "10111001", "10000000",
+    "11100000", "10111000", "10000100",
+    "11100000", "10111001", "10001001",
+    "11100000", "10111000", "10110010",
+    "11100000", "10111000", "10000010",
+    "11100000", "10111000", "10101101",
+    "11100000", "10111001", "10000010",
+    "11100000", "10111000", "10010111",
+    "11100000", "10111000", "10010100",
+    "11100000", "10111000", "10010100"
+]
+
+data = bytes(int(b, 2) for b in Binary)
+print(data.decode("utf-8"))</code></pre>
+    <div class="output" id="output">Output จะแสดงตรงนี้...</div>
+</div>
+
+<script>
+function runCode() {
+    const Binary = [
+        "11100000", "10111001", "10000000",
+        "11100000", "10111000", "10000100",
+        "11100000", "10111001", "10001001",
+        "11100000", "10111000", "10110010",
+        "11100000", "10111000", "10000010",
+        "11100000", "10111000", "10101101",
+        "11100000", "10111001", "10000010",
+        "11100000", "10111000", "10010111",
+        "11100000", "10111000", "10010100",
+        "11100000", "10111000", "10010100"
+    ];
+
+    // จำลองการแปลงไบต์ UTF-8 ของ JavaScript ให้ตรงกับ Python
+    const bytesArray = Binary.map(b => parseInt(b, 2));
+    const decodedString = new TextDecoder("utf-8").decode(new Uint8Array(bytesArray));
+
+    document.getElementById("output").innerText = decodedString;
+}
+</script>
+
+</body>
+</html>
